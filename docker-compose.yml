@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "8080:80"
+    volumes:
+     - ./src/:/var/www/html/
+  db:
+    image: "mariadb:latest"
+    volumes:
+      - ./db-data:/docker-entrypoint-initdb.d
+    env_file: env.list
