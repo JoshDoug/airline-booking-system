@@ -6,8 +6,9 @@ services:
      - "8080:80"
     volumes:
      - ./src/:/var/www/html/
+     - ./config/:/var/www/config/
   db:
     image: "mariadb:latest"
     volumes:
       - ./db-data:/docker-entrypoint-initdb.d
-    env_file: env.list
+    env_file: config/env.list
