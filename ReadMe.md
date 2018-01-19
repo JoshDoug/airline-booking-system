@@ -19,7 +19,7 @@ See Project Wiki for Coursework Brief, and design process & dicsussion on front-
 
 ## Git Workflow
 
-Up for discussion, but preferably:
+Up for discussion (for more information see links in Wiki Home page), but preferably:
 
 * master stays in a stable state and is not worked on directly
 * branch for a feature
