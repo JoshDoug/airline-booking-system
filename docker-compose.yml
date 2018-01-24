@@ -12,3 +12,7 @@ services:
     volumes:
       - ./db-data:/docker-entrypoint-initdb.d
     env_file: config/env.list
+  pma:
+    image: "phpmyadmin/phpmyadmin:latest"
+    ports:
+      - "8081:80"

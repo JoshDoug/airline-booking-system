@@ -6,3 +6,4 @@ MYSQL_ROOT_PASSWORD=root_password
 MYSQL_DATABASE=name
 MYSQL_USER=username
 MYSQL_PASSWORD=database_password
+HOST=host

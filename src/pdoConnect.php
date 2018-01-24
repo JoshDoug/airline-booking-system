@@ -13,8 +13,9 @@ try {
         $dbName = $ini['MYSQL_DATABASE'];
         $dbUser = $ini['MYSQL_USER'];
         $dbPassword = $ini['MYSQL_PASSWORD'];
+        $host = $ini['HOST'];
 
-        $dsn = "mysql:host=db;dbname=$dbName";
+        $dsn = "mysql:host=$host;dbname=$dbName";
         $db = new PDO($dsn, "$dbUser", "$dbPassword");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
