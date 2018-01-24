@@ -12,7 +12,7 @@ See Project Wiki for Coursework Brief, and design process & dicsussion on front-
   * Add `docker-compose.yml` runtime configuration
   * Duplicate example-env.list, move to config folder and rename env.list
       * E.g. run `mkdir config && cp example-env.list config/env.list`
-      * Change the example passwords, DB name, and DB username
+      * Change the example passwords, DB name, DB username, and host variables
   * Run project in PhpStorm or from the CLI with `docker-compose up`
   * Stop project: `docker-compose stop` or `docker-compose down`
       * `stop` stops the containers, `down` stops & removes the containers
