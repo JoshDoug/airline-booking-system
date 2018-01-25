@@ -2,6 +2,9 @@
 
 See Project Wiki for Coursework Brief, and design process & dicsussion on front-end, back-end, and database.
 
+GitLab will be used for managing the code and project itself. If work isn't reflected in code that's been pushed, 
+issues that have been completed and closed, or wikis that have been written, then it can be presumed the work hasn't been done.
+
 ## Setup
 
 * Install and license PhpStorm
