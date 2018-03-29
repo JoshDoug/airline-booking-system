@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 29, 2018 at 12:42 PM
+-- Generation Time: Mar 29, 2018 at 01:59 PM
 -- Server version: 10.2.12-MariaDB-10.2.12+maria~jessie
 -- PHP Version: 7.1.9
 
@@ -47,7 +47,7 @@ CREATE TABLE `bookings` (
   `customerId` int(7) NOT NULL,
   `flightTypeId` int(3) NOT NULL,
   `flightDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -79,6 +79,72 @@ CREATE TABLE `flightType` (
   `type` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `flightType`
+--
+
+INSERT INTO `flightType` (`flightTypeId`, `departurePoint`, `destination`, `departureTime`, `duration`, `day`, `type`) VALUES
+(1, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Monday', 'Domestic'),
+(2, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Tuesday', 'Domestic'),
+(3, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Wednesday', 'Domestic'),
+(4, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Thursday', 'Domestic'),
+(5, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Friday', 'Domestic'),
+(6, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Saturday', 'Domestic'),
+(7, 'Stansted', 'Manchester', '08:30:00', '01:00:00', 'Sunday', 'Domestic'),
+(8, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Monday', 'Domestic'),
+(9, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Tuesday', 'Domestic'),
+(10, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Wednesday', 'Domestic'),
+(11, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Thursday', 'Domestic'),
+(12, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Friday', 'Domestic'),
+(13, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Saturday', 'Domestic'),
+(14, 'Stansted', 'Glasgow', '08:30:00', '01:00:00', 'Sunday', 'Domestic'),
+(15, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Monday', 'Domestic'),
+(16, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Tuesday', 'Domestic'),
+(17, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Wednesday', 'Domestic'),
+(18, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Thursday', 'Domestic'),
+(19, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Friday', 'Domestic'),
+(20, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Saturday', 'Domestic'),
+(21, 'Stansted', 'Dublin', '08:30:00', '01:20:00', 'Sunday', 'Domestic'),
+(22, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Monday', 'Domestic'),
+(23, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Tuesday', 'Domestic'),
+(24, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Wednesday', 'Domestic'),
+(25, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Thursday', 'Domestic'),
+(26, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Friday', 'Domestic'),
+(27, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Saturday', 'Domestic'),
+(28, 'Manchester', 'Stansted', '18:00:00', '01:00:00', 'Sunday', 'Domestic'),
+(29, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Monday', 'Domestic'),
+(30, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Tuesday', 'Domestic'),
+(31, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Wednesday', 'Domestic'),
+(32, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Thursday', 'Domestic'),
+(33, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Friday', 'Domestic'),
+(34, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Saturday', 'Domestic'),
+(35, 'Glasgow', 'Stansted', '18:00:00', '01:00:00', 'Sunday', 'Domestic'),
+(36, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Monday', 'Domestic'),
+(37, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Tuesday', 'Domestic'),
+(38, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Wednesday', 'Domestic'),
+(39, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Thursday', 'Domestic'),
+(40, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Friday', 'Domestic'),
+(41, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Saturday', 'Domestic'),
+(42, 'Dublin', 'Stansted', '18:00:00', '01:20:00', 'Sunday', 'Domestic'),
+(43, 'Stansted', 'Paris', '08:00:00', '01:15:00', 'Monday', 'Europe'),
+(44, 'Stansted', 'Paris', '08:00:00', '01:15:00', 'Wednesday', 'Europe'),
+(45, 'Stansted', 'Paris', '08:00:00', '01:15:00', 'Friday', 'Europe'),
+(46, 'Paris', 'Stansted', '18:00:00', '01:15:00', 'Tuesday', 'Europe'),
+(47, 'Paris', 'Stansted', '18:00:00', '01:15:00', 'Thursday', 'Europe'),
+(48, 'Paris', 'Stansted', '18:00:00', '01:15:00', 'Friday', 'Europe'),
+(49, 'Stansted', 'Madrid', '08:00:00', '02:00:00', 'Monday', 'Europe'),
+(50, 'Stansted', 'Madrid', '08:00:00', '02:00:00', 'Wednesday', 'Europe'),
+(51, 'Stansted', 'Madrid', '08:00:00', '02:00:00', 'Friday', 'Europe'),
+(52, 'Madrid', 'Stansted', '18:00:00', '02:00:00', 'Tuesday', 'Europe'),
+(53, 'Madrid', 'Stansted', '18:00:00', '02:00:00', 'Thursday', 'Europe'),
+(54, 'Madrid', 'Stansted', '18:00:00', '02:00:00', 'Friday', 'Europe'),
+(55, 'Stansted', 'Brussels', '08:00:00', '01:20:00', 'Monday', 'Europe'),
+(56, 'Stansted', 'Brussels', '08:00:00', '01:20:00', 'Wednesday', 'Europe'),
+(57, 'Stansted', 'Brussels', '08:00:00', '01:20:00', 'Friday', 'Europe'),
+(58, 'Brussels', 'Stansted', '18:00:00', '01:20:00', 'Tuesday', 'Europe'),
+(59, 'Brussels', 'Stansted', '18:00:00', '01:20:00', 'Thursday', 'Europe'),
+(60, 'Brussels', 'Stansted', '18:00:00', '01:20:00', 'Friday', 'Europe');
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +154,19 @@ CREATE TABLE `flightType` (
 CREATE TABLE `locations` (
   `location` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`location`) VALUES
+('Brussels'),
+('Dublin'),
+('Glasgow'),
+('Madrid'),
+('Manchester'),
+('Paris'),
+('Stansted');
 
 --
 -- Indexes for dumped tables
@@ -155,7 +234,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `flightType`
 --
 ALTER TABLE `flightType`
-  MODIFY `flightTypeId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `flightTypeId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Constraints for dumped tables
