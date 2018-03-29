@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 29, 2018 at 11:54 AM
+-- Generation Time: Mar 29, 2018 at 12:42 PM
 -- Server version: 10.2.12-MariaDB-10.2.12+maria~jessie
 -- PHP Version: 7.1.9
 
@@ -30,11 +30,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrators` (
   `adminId` int(10) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `firstName` text NOT NULL,
-  `lastName` text NOT NULL,
-  `companyEmail` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `firstName` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastName` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `companyEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `bookingReference` int(10) NOT NULL,
+  `customerId` int(7) NOT NULL,
+  `flightTypeId` int(3) NOT NULL,
+  `flightDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -44,11 +57,27 @@ CREATE TABLE `administrators` (
 
 CREATE TABLE `customers` (
   `customerId` int(7) NOT NULL,
-  `firstName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `lastName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `firstName` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastName` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flightType`
+--
+
+CREATE TABLE `flightType` (
+  `flightTypeId` int(3) NOT NULL,
+  `departurePoint` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `destination` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `departureTime` time NOT NULL,
+  `duration` time NOT NULL,
+  `day` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -57,8 +86,8 @@ CREATE TABLE `customers` (
 --
 
 CREATE TABLE `locations` (
-  `location` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `location` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -72,11 +101,27 @@ ALTER TABLE `administrators`
   ADD UNIQUE KEY `companyEmail` (`companyEmail`);
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`bookingReference`),
+  ADD KEY `customerId` (`customerId`),
+  ADD KEY `flightTypeId` (`flightTypeId`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customerId`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `flightType`
+--
+ALTER TABLE `flightType`
+  ADD PRIMARY KEY (`flightTypeId`),
+  ADD KEY `destination` (`destination`),
+  ADD KEY `departurePoint` (`departurePoint`);
 
 --
 -- Indexes for table `locations`
@@ -95,10 +140,40 @@ ALTER TABLE `administrators`
   MODIFY `adminId` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `bookingReference` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `customerId` int(7) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `flightType`
+--
+ALTER TABLE `flightType`
+  MODIFY `flightTypeId` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customers` (`customerId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`flightTypeId`) REFERENCES `flightType` (`flightTypeId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `flightType`
+--
+ALTER TABLE `flightType`
+  ADD CONSTRAINT `flightType_ibfk_1` FOREIGN KEY (`departurePoint`) REFERENCES `locations` (`location`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flightType_ibfk_2` FOREIGN KEY (`destination`) REFERENCES `locations` (`location`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
