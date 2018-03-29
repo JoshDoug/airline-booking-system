@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrators`
+-- Table structure for table `administrator`
 --
 
-CREATE TABLE `administrators` (
+CREATE TABLE `administrator` (
   `adminId` int(10) NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstName` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `administrators` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bookings`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE `bookings` (
+CREATE TABLE `booking` (
   `bookingReference` int(10) NOT NULL,
   `customerId` int(7) NOT NULL,
   `flightTypeId` int(3) NOT NULL,
@@ -52,10 +52,10 @@ CREATE TABLE `bookings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
+-- Table structure for table `customer`
 --
 
-CREATE TABLE `customers` (
+CREATE TABLE `customer` (
   `customerId` int(7) NOT NULL,
   `firstName` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastName` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -148,18 +148,18 @@ INSERT INTO `flightType` (`flightTypeId`, `departurePoint`, `destination`, `depa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `locations`
+-- Table structure for table `location`
 --
 
-CREATE TABLE `locations` (
-  `location` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+CREATE TABLE `location` (
+  `locationName` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `locations`
+-- Dumping data for table `location`
 --
 
-INSERT INTO `locations` (`location`) VALUES
+INSERT INTO `location` (`locationName`) VALUES
 ('Brussels'),
 ('Dublin'),
 ('Glasgow'),
@@ -173,24 +173,24 @@ INSERT INTO `locations` (`location`) VALUES
 --
 
 --
--- Indexes for table `administrators`
+-- Indexes for table `administrator`
 --
-ALTER TABLE `administrators`
+ALTER TABLE `administrator`
   ADD PRIMARY KEY (`adminId`),
   ADD UNIQUE KEY `companyEmail` (`companyEmail`);
 
 --
--- Indexes for table `bookings`
+-- Indexes for table `booking`
 --
-ALTER TABLE `bookings`
+ALTER TABLE `booking`
   ADD PRIMARY KEY (`bookingReference`),
   ADD KEY `customerId` (`customerId`),
   ADD KEY `flightTypeId` (`flightTypeId`);
 
 --
--- Indexes for table `customers`
+-- Indexes for table `customer`
 --
-ALTER TABLE `customers`
+ALTER TABLE `customer`
   ADD PRIMARY KEY (`customerId`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -203,31 +203,31 @@ ALTER TABLE `flightType`
   ADD KEY `departurePoint` (`departurePoint`);
 
 --
--- Indexes for table `locations`
+-- Indexes for table `location`
 --
-ALTER TABLE `locations`
-  ADD PRIMARY KEY (`location`);
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`locationName`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `administrators`
+-- AUTO_INCREMENT for table `administrator`
 --
-ALTER TABLE `administrators`
+ALTER TABLE `administrator`
   MODIFY `adminId` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bookings`
+-- AUTO_INCREMENT for table `booking`
 --
-ALTER TABLE `bookings`
+ALTER TABLE `booking`
   MODIFY `bookingReference` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `customers`
+-- AUTO_INCREMENT for table `customer`
 --
-ALTER TABLE `customers`
+ALTER TABLE `customer`
   MODIFY `customerId` int(7) NOT NULL AUTO_INCREMENT;
 
 --
@@ -241,18 +241,18 @@ ALTER TABLE `flightType`
 --
 
 --
--- Constraints for table `bookings`
+-- Constraints for table `booking`
 --
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customers` (`customerId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`flightTypeId`) REFERENCES `flightType` (`flightTypeId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `booking`
+  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`flightTypeId`) REFERENCES `flightType` (`flightTypeId`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `flightType`
 --
 ALTER TABLE `flightType`
-  ADD CONSTRAINT `flightType_ibfk_1` FOREIGN KEY (`departurePoint`) REFERENCES `locations` (`location`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `flightType_ibfk_2` FOREIGN KEY (`destination`) REFERENCES `locations` (`location`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `flightType_ibfk_1` FOREIGN KEY (`departurePoint`) REFERENCES `location` (`locationName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flightType_ibfk_2` FOREIGN KEY (`destination`) REFERENCES `location` (`locationName`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
