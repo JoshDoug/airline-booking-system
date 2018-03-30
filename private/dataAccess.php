@@ -114,15 +114,80 @@ function getLocations() {
 }
 
 // ! Select Flights
-// ! Select Flights by Destination/DeparturePoint/Day/Date
+function getFlights($departurePoint, $destination, $startDate, $endDate) {
+    global $db;
+
+    // If no start date is chosen then default to current date
+    if(!isset($startDate)) {
+        $startDate = date('Y-m-d');
+    }
+
+    // If no end date is chosen then default to two years ahead of current date
+    if(!isset($endDate)) {
+        $endDate = date('Y-m-d', strtotime('+24 Months'));
+    }
+
+    // Lengthy function due to range of options - could break down into smaller functions?
+    if ($departurePoint == "All" && $destination == "All") {
+        $sql = 'SELECT * FROM flight
+                WHERE date>=:startDate AND date<=:endDate
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':startDate', $startDate);
+        $stmt->bindParam(':endDate', $endDate);
+    } elseif ($departurePoint == "All") {
+        $sql = 'SELECT * FROM flight WHERE flight.destination=:destination
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':destination', $destination);
+    } elseif ($destination == "All") {
+        $sql = 'SELECT * FROM flight WHERE flight.departurePoint=:departurePoint
+                ORDER BY type, destination, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':departurePoint', $departurePoint);
+    } else {
+        $sql = 'SELECT * FROM flight WHERE flight.departurePoint=:departurePoint AND flight.destination=:destination
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':departurePoint', $departurePoint);
+        $stmt->bindParam(':destination', $destination);
+    }
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_CLASS, 'Flight');
+}
+
+// Get a single Flight using the surrogate Id
+function getFlightById($flightId) {
+    global $db;
+    $sql = 'SELECT * FROM flight WHERE flight.flightId=:flightId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':flightId', $flightId);
+    $stmt->execute();
+    return array_shift( $stmt->fetchAll(PDO::FETCH_CLASS, 'Flight'));
+}
 
 // ------ UPDATE STATEMENTS ------
 
 // -- Admin --
 // ! Update Flights
-// Update Single Flight
-function updateFlight() {
+// Update Flight Details
+function updateFlight($flightId, $departurePoint, $destination, $date, $day, $departureTime, $duration, $type) {
+    global $db;
 
+    // Update where surrogate ID = flightID
+    $sql = "UPDATE flight
+    SET departurePoint=:departurePoint, destination=:destination, date=:date, day=:day, departureTime=:departureTime, duration=:duration, type=:type
+    WHERE flightId=:flightId";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':departurePoint', $departurePoint);
+    $stmt->bindParam(':destination', $destination);
+    $stmt->bindParam(':date', $date);
+    $stmt->bindParam(':day', $day); // Consider trying to automate this part - otherwise date and day could be conflicting
+    $stmt->bindParam(':departureTime', $departureTime);
+    $stmt->bindParam(':duration', $duration);
+    $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':flightId', $flightId);
+    $stmt->execute();
 }
 
 // ! Update Flight Types
