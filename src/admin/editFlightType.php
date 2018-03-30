@@ -16,16 +16,6 @@ if(!isset($_REQUEST['flightTypeId'])) {
 $flightType = getFlightTypeById($_REQUEST['flightTypeId']);
 $locations = getLocations();
 
-$days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-];
-
 // View Section
 ?>
 
