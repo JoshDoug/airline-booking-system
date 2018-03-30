@@ -27,13 +27,13 @@ $locations = getLocations();
 
 ?>
 
-    <form action="manageFlights.php" method="post">
+    <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="addLocation" value="addLocation">
         Add Location: <input name="location"/>
         <input type="submit" value="Add Location"/>
     </form>
 
-    <form action="manageFlights.php" method="post">
+    <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="removeLocation" value="removeLocation">
         Remove Location:
         <select name="location">
@@ -44,7 +44,7 @@ $locations = getLocations();
         <input type="submit" value="Remove Location"/>
     </form>
 
-    <form action="manageFlights.php" method="post">
+    <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="addFlightType" value="addFlightType">
         Add Flight Type:
         <select name="departurePoint">
@@ -83,7 +83,7 @@ $locations = getLocations();
         <input type="submit" value="Add Flight Type"/>
     </form>
 
-    <form action="manageFlights.php" method="post">
+    <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="removeFlightType" value="removeFlightType">
         Remove Flight Type:
         <select name="departurePoint">
@@ -113,7 +113,7 @@ $locations = getLocations();
         <input type="submit" value="Remove Flight Type"/>
     </form>
 
-    <form action="manageFlights.php" method="get">
+    <form action="manageFlightTypes.php" method="get">
         Search for flights to or from Stansted:
         <select name="departurePoint">
             <option value="All">All</option>
@@ -154,7 +154,7 @@ $locations = getLocations();
                 <td><?= $flightType->day ?></td>
                 <td><?= $flightType->type ?></td>
                 <td><a href="editFlightType.php?flightTypeId=<?= $flightType->flightTypeId ?>">Edit</a></td>
-                <td><form action="manageFlights.php?departurePoint=<?=$_REQUEST['departurePoint']?>&destination=<?=$_REQUEST['destination']?>" method="post">
+                <td><form action="manageFlightTypes.php?departurePoint=<?=$_REQUEST['departurePoint']?>&destination=<?=$_REQUEST['destination']?>" method="post">
                         <input type="hidden" name="removeFlightType" value="<?= $flightType->flightTypeId ?>">
                         <input type="submit" value="Delete"/>
                     </form>
