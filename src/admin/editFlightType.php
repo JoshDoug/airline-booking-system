@@ -5,6 +5,7 @@ require_once '../../private/initialise.php';
 
 if(isset($_REQUEST['editFlightType'])) {
     // Update DB and redirect to show page
+    // Could convert into an array or object to make this easier to pass
     updateFlightType($_REQUEST['flightTypeId'], $_REQUEST['departurePoint'], $_REQUEST['destination'], $_REQUEST['day'], $_REQUEST['departureTime'], $_REQUEST['duration'], $_REQUEST['type']);
     header('Location: showFlightType.php?flightTypeId=' . $_REQUEST['flightTypeId']);
 }
