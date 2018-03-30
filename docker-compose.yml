@@ -7,6 +7,8 @@ services:
     volumes:
      - ./src/:/var/www/html/
      - ./config/:/var/www/config/
+     - ./private/:/var/www/private/
+
   db:
     image: "mariadb:latest"
     volumes:
