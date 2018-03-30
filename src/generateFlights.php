@@ -15,7 +15,7 @@ if (isset($_REQUEST['addLocation'])) {
     foreach ($_REQUEST['days'] as $day) {
         addFlightType($_REQUEST['departurePoint'], $_REQUEST['destination'], $_REQUEST['departureTime'], $day, $_REQUEST['duration'], $_REQUEST['type']);
     }
-}  elseif (isset($_REQUEST['removeFlightType'])) {
+} elseif (isset($_REQUEST['removeFlightType'])) {
     //deleteLocation($_REQUEST['location']);
 } elseif (isset($_REQUEST['departurePoint']) && isset($_REQUEST['destination'])) {
     $flightTypes = getFlightTypes($_REQUEST['departurePoint'], $_REQUEST['destination']);
@@ -130,9 +130,26 @@ $locations = getLocations();
     </form>
 
 <?php if (isset($flightTypes)) : ?>
-    <ul>
+    <table>
+        <tr>
+            <th>Flight Type Id</th>
+            <th>Departure Point</th>
+            <th>Destination</th>
+            <th>Departure Time</th>
+            <th>Duration</th>
+            <th>Day</th>
+            <th>Type</th>
+        </tr>
         <?php foreach ($flightTypes as $flightType): ?>
-            <li><?= $flightType->departurePoint ?> <?= $flightType->destination ?> <?= $flightType->departureTime ?> <?= $flightType->duration ?> <?= $flightType->day ?> <?= $flightType->type ?></li>
+            <tr>
+                <td><?= $flightType->flightTypeId ?></td>
+                <td><?= $flightType->departurePoint ?></td>
+                <td><?= $flightType->destination ?></td>
+                <td><?= $flightType->departureTime ?></td>
+                <td><?= $flightType->duration ?></td>
+                <td><?= $flightType->day ?></td>
+                <td><?= $flightType->type ?></td>
+            </tr>
         <?php endforeach ?>
-    </ul>
+    </table>
 <?php endif ?>

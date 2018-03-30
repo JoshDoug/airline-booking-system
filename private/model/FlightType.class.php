@@ -12,6 +12,7 @@ class FlightType {
 
     // -- ACTIVE RECORD CODE --
 
+    private $flightTypeId;
     private $departurePoint;
     private $destination;
     private $departureTime;
