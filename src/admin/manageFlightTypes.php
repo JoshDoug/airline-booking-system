@@ -88,36 +88,6 @@ $locations = getLocations();
         <input type="submit" value="Add Flight Type"/>
     </form>
 
-    <form action="manageFlightTypes.php" method="post">
-        <input type="hidden" name="removeFlightType" value="removeFlightType">
-        Remove Flight Type:
-        <select name="departurePoint">
-            <option value="All">All</option>
-            <?php foreach ($locations as $location): ?>
-                <option value="<?= $location->locationName ?>"><?= $location->locationName ?></option>
-            <?php endforeach ?>
-        </select>
-
-        <select name="destination">
-            <option value="All">All</option>
-            <?php foreach ($locations as $location): ?>
-                <option value="<?= $location->locationName ?>"><?= $location->locationName ?></option>
-            <?php endforeach ?>
-        </select>
-
-        <select name="days[]" size="7" multiple>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-        </select>
-
-        <input type="submit" value="Remove Flight Type"/>
-    </form>
-
     <form action="manageFlightTypes.php" method="get">
         Search for flights to or from Stansted:
         <select name="departurePoint">
