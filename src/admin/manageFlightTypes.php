@@ -27,6 +27,11 @@ $locations = getLocations();
 
 ?>
 
+    <h1>Manage Flight Types</h1>
+
+    <p><a href="index.php">Admin Page</a></p>
+
+
     <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="addLocation" value="addLocation">
         Add Location: <input name="location"/>
@@ -154,7 +159,9 @@ $locations = getLocations();
                 <td><?= $flightType->day ?></td>
                 <td><?= $flightType->type ?></td>
                 <td><a href="editFlightType.php?flightTypeId=<?= $flightType->flightTypeId ?>">Edit</a></td>
-                <td><form action="manageFlightTypes.php?departurePoint=<?=$_REQUEST['departurePoint']?>&destination=<?=$_REQUEST['destination']?>" method="post">
+                <td>
+                    <form action="manageFlightTypes.php?departurePoint=<?= $_REQUEST['departurePoint'] ?>&destination=<?= $_REQUEST['destination'] ?>"
+                          method="post">
                         <input type="hidden" name="removeFlightType" value="<?= $flightType->flightTypeId ?>">
                         <input type="submit" value="Delete"/>
                     </form>
