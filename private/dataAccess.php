@@ -70,18 +70,22 @@ function addFlight($flightType, $date) {
 function getFlightTypes($departurePoint, $destination) {
     global $db;
     if ($departurePoint == "All" && $destination == "All") {
-        $sql = 'SELECT * FROM flightType';
+        $sql = 'SELECT * FROM flightType
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
         $stmt = $db->prepare($sql);
     } elseif ($departurePoint == "All") {
-        $sql = 'SELECT * FROM flightType WHERE flightType.destination=:destination';
+        $sql = 'SELECT * FROM flightType WHERE flightType.destination=:destination
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':destination', $destination);
     } elseif ($destination == "All") {
-        $sql = 'SELECT * FROM flightType WHERE flightType.departurePoint=:departurePoint';
+        $sql = 'SELECT * FROM flightType WHERE flightType.departurePoint=:departurePoint
+                ORDER BY type, destination, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':departurePoint', $departurePoint);
     } else {
-        $sql = 'SELECT * FROM flightType WHERE flightType.departurePoint=:departurePoint AND flightType.destination=:destination';
+        $sql = 'SELECT * FROM flightType WHERE flightType.departurePoint=:departurePoint AND flightType.destination=:destination
+                ORDER BY type, departurePoint, FIELD(day, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")';
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':departurePoint', $departurePoint);
         $stmt->bindParam(':destination', $destination);
