@@ -6,10 +6,11 @@
  * Time: 17:26
  */
 
+$envFilePath = CONFIG_PATH . '/env.list';
+
 try {
-    if(file_exists('../config/env.list')) {
-        $dbDetails = file_get_contents('../config/env.list');
-        $ini = parse_ini_file('../config/env.list');
+    if(file_exists( $envFilePath)) {
+        $ini = parse_ini_file($envFilePath);
         $dbName = $ini['MYSQL_DATABASE'];
         $dbUser = $ini['MYSQL_USER'];
         $dbPassword = $ini['MYSQL_PASSWORD'];

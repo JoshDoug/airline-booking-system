@@ -6,3 +6,5 @@ env.list
 
 # System Files
 .DS_Store
+
+temp/
