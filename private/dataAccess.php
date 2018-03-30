@@ -59,7 +59,17 @@ function getFlightTypes($departurePoint, $destination) {
         $stmt->bindParam(':destination', $destination);
     }
     $stmt->execute();
-    return $flightTypes = $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType');
+    return $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType');
+}
+
+// Get a single Flight Type using the surrogate Id
+function getFlightTypeById($flightTypeId) {
+    global $db;
+    $sql = 'SELECT * FROM flightType WHERE flightType.flightTypeId=:flightTypeId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':flightTypeId', $flightTypeId);
+    $stmt->execute();
+    return array_shift( $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType'));
 }
 
 // -- Both --
@@ -107,8 +117,12 @@ function deleteLocation($locationName) {
 }
 
 // ! Delete Flight Type
-function deleteFlightType() {
+function deleteFlightType($flightTypeId) {
     global $db;
+    $sql = 'DELETE FROM flightType WHERE flightTypeId=:flightTypeId LIMIT 1';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':flightTypeId', $flightTypeId);
+    $stmt->execute();
 }
 
 // Delete Booking?
