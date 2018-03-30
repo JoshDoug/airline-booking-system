@@ -13,12 +13,12 @@ function addLocation($locationName) {
 }
 
 // ! Add FlightType
-function addFlightType($depareturePoint, $destination, $departureTime, $day, $duration, $type) {
+function addFlightType($departurePoint, $destination, $departureTime, $day, $duration, $type) {
     global $db;
     $sql = 'INSERT INTO flightType (departurePoint, destination, departureTime, duration, day, type)
                 VALUE (:departurePoint, :destination, :departureTime, :duration, :day, :type)';
     $stmt = $db->prepare($sql);
-    $stmt->bindParam(':departurePoint', $depareturePoint);
+    $stmt->bindParam(':departurePoint', $departurePoint);
     $stmt->bindParam(':destination', $destination);
     $stmt->bindParam(':departureTime', $departureTime);
     $stmt->bindParam(':duration', $duration);
@@ -96,8 +96,22 @@ function updateFlight() {
 // ! Update Flight Types
 
 // Update Single Flight Type
-function updateFlightType() {
+function updateFlightType($flightTypeId, $departurePoint, $destination, $day, $departureTime, $duration, $type) {
+    global $db;
 
+    // Update where surrogate ID = flightTypeID
+    $sql = "UPDATE flightType
+    SET departurePoint=:departurePoint, destination=:destination, day=:day, departureTime=:departureTime, duration=:duration, type=:type
+    WHERE flightTypeId=:flightTypeId";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':departurePoint', $departurePoint);
+    $stmt->bindParam(':destination', $destination);
+    $stmt->bindParam(':day', $day);
+    $stmt->bindParam(':departureTime', $departureTime);
+    $stmt->bindParam(':duration', $duration);
+    $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':flightTypeId', $flightTypeId);
+    $stmt->execute();
 }
 
 // ! Update Location
