@@ -28,6 +28,34 @@ function addFlightType($departurePoint, $destination, $departureTime, $day, $dur
 }
 
 // ! Add Flight(s)
+function addFlights($endDate) {
+    global $db;
+    $startDate = strtotime(date("Y-m-d")); // Convert date to Unix timestamp (easy to compare which date is newer/older)
+    $endDate = strtotime($endDate);
+    $flightTypes = getFlightTypes("All", "All");
+
+    foreach ($flightTypes as $flightType) {
+        for($i = strtotime($flightType->day, $startDate); $i <= $endDate; $i = strtotime('+1 week', $i)) {
+            addFlight($flightType, date('Y-m-d', $i));
+        }
+    }
+}
+
+function addFlight($flightType, $date) {
+    global $db;
+    $sql = 'INSERT IGNORE INTO flight (departurePoint, destination, date, departureTime, duration, day, type)
+                VALUE (:departurePoint, :destination, :date, :departureTime, :duration, :day, :type)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':departurePoint', $flightType->departurePoint);
+    $stmt->bindParam(':destination', $flightType->destination);
+    $stmt->bindParam(':date', $date);
+    $stmt->bindParam(':departureTime', $flightType->departureTime);
+    $stmt->bindParam(':duration', $flightType->duration);
+    $stmt->bindParam(':day', $flightType->day);
+    $stmt->bindParam(':type', $flightType->type); // Should really be able to work this out but would require database changes
+    $stmt->execute();
+}
+
 // Add Administrator
 
 // -- Customer --
@@ -138,5 +166,15 @@ function deleteFlightType($flightTypeId) {
     $stmt->bindParam(':flightTypeId', $flightTypeId);
     $stmt->execute();
 }
+
+// ! Delete FLight - only allow for flights selected in the future
+function deleteFlight($flightId) {
+    global $db;
+    $sql = 'DELETE FROM flight WHERE flightId=:flightId LIMIT 1';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':flightId', $flightId);
+    $stmt->execute();
+}
+
 
 // Delete Booking?
