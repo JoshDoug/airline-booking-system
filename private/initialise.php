@@ -16,3 +16,17 @@ spl_autoload_register('my_autoload');
 
 require_once( PRIVATE_PATH . '/pdoConnect.php');
 require_once( PRIVATE_PATH . '/dataAccess.php');
+
+// Array of Days
+$days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+];
+
+// Set default timezone once
+date_default_timezone_set("UTC");
