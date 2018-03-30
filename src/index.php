@@ -1,4 +1,7 @@
 <?php
+
+require_once '../private/initialise.php';
+
 $greeting = "Hello World";
 //
 //$values = [1,2,3,4,5,6];
@@ -7,14 +10,12 @@ $greeting = "Hello World";
 //    echo $value;
 //}
 
-require_once 'pdoConnect.php';
+//require_once 'pdoConnect.php';
 
-$stmt = $db->prepare('SELECT * FROM states');
+$stmt = $db->prepare('SELECT * FROM flightType');
 $stmt->execute();
 $numrows = $stmt->rowCount();
-$results = $stmt->fetchAll();
-
-var_dump(PDO::getAvailableDrivers());
+$flightTypes = $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType');
 
 ?>
 <!DOCTYPE html>
@@ -27,10 +28,18 @@ var_dump(PDO::getAvailableDrivers());
 <p>PHP Version: <?=PHP_VERSION?></p>
 <p>PHP Database Query: <?= $numrows ?></p>
 
+<h2>Admin:</h2>
+<ul>
+    <li><?= $admin->id ?></li>
+    <li><?= $admin->first ?></li>
+</ul>
+
 <h2>States:</h2>
 <ul>
-    <?php foreach($results as $result) : ?>
-    <li><?= $result[0] . " " . $result[1] ?></li>
+    <?php foreach($flightTypes as $flightType) : ?>
+        <li><?= $flightType->departurePoint ?></li>
+        <li><?= $flightType->destination ?></li>
+        <li><?= $flightType->departureTime ?></li>
     <?php endforeach; ?>
 </ul>
 
