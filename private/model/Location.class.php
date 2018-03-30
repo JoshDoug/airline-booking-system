@@ -3,14 +3,11 @@
  * Created by PhpStorm.
  * User: jds
  * Date: 29/03/2018
- * Time: 16:15
+ * Time: 21:16
  */
 
-class Booking {
-    private $bookingReference;
-    private $customerId;
-    private $flightTypeId;
-    private $flightDate;
+class Location {
+    private $locationName;
 
     public function __get($name) {
         return $this->$name;
