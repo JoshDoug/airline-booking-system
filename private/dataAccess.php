@@ -118,12 +118,12 @@ function getFlights($departurePoint, $destination, $startDate, $endDate) {
     global $db;
 
     // If no start date is chosen then default to current date
-    if(!isset($startDate)) {
+    if($startDate == NULL) {
         $startDate = date('Y-m-d');
     }
 
     // If no end date is chosen then default to two years ahead of current date
-    if(!isset($endDate)) {
+    if($endDate == NULL) {
         $endDate = date('Y-m-d', strtotime('+24 Months'));
     }
 
