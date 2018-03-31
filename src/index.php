@@ -1,47 +1,36 @@
 <?php
-
 require_once '../private/initialise.php';
 
-$greeting = "Hello World";
-//
-//$values = [1,2,3,4,5,6];
-//
-//foreach ($values as $value) {
-//    echo $value;
-//}
-
-//require_once 'pdoConnect.php';
-
-$stmt = $db->prepare('SELECT * FROM flightType');
-$stmt->execute();
-$numrows = $stmt->rowCount();
-$flightTypes = $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType');
+$locations = getLocations();
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?=$greeting?></title>
+    <title>Home</title>
 </head>
 <body>
-<h1><?=$greeting?></h1>
-<p>PHP Version: <?=PHP_VERSION?></p>
-<p>PHP Database Query: <?= $numrows ?></p>
+<h1>Home</h1>
 
-<h2>Admin:</h2>
-<ul>
-    <li><?= $admin->id ?></li>
-    <li><?= $admin->first ?></li>
-</ul>
+<form action="searchResults.php" method="get">
+    Search for flights to or from Stansted:
+    <select name="departurePoint">
+        <option value="All">All</option>
+        <?php foreach ($locations as $location): ?>
+            <option value="<?= $location->locationName ?>"><?= $location->locationName ?></option>
+        <?php endforeach ?>
+    </select>
 
-<h2>States:</h2>
-<ul>
-    <?php foreach($flightTypes as $flightType) : ?>
-        <li><?= $flightType->departurePoint ?></li>
-        <li><?= $flightType->destination ?></li>
-        <li><?= $flightType->departureTime ?></li>
-    <?php endforeach; ?>
-</ul>
+    <select name="destination">
+        <option value="All">All</option>
+        <?php foreach ($locations as $location): ?>
+            <option value="<?= $location->locationName ?>"><?= $location->locationName ?></option>
+        <?php endforeach ?>
+    </select>
 
+    <input type="date" name="startDate" min="<?= date('Y-m-d') ?>">
+    <input type="date" name="endDate" min="<?= date('Y-m-d') ?>">
+    <input type="submit" value="Search Flights"/>
+</form>
 </body>
 </html>
