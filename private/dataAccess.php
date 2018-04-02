@@ -61,6 +61,7 @@ function addFlight($flightType, $date) {
 // -- Customer --
 // ! Register
 function registerCustomer($firstName, $lastName, $email, $password) {
+    global $db;
     $sql = 'INSERT INTO customer (firstName, lastName, email, password)
             VALUES (:firstName, :lastName, :email, :password)';
     $stmt = $db->prepare($sql);
@@ -68,9 +69,8 @@ function registerCustomer($firstName, $lastName, $email, $password) {
     $stmt->bindParam(':lastName', $lastName);
     $stmt->bindParam(':email', $email);
     // Store an encrypted version of the password
-    $stmt->bindValue(':pwd', password_hash($password, PASSWORD_DEFAULT));
+    $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
     $stmt->execute();
-
     return $stmt->rowCount() == 1;
 }
 
