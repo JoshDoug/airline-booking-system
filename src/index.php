@@ -8,6 +8,7 @@ $locations = getLocations();
     <title>Fly Guys</title>
 </head>
 <body>
+<h1>Fly Guys</h1>
 <!-- Change this as necessary but keep the links -->
 <nav>
     <ul>
@@ -16,8 +17,6 @@ $locations = getLocations();
         <li><a href="registerUser.php">Register</a></li>
     </ul>
 </nav>
-
-<h1>Fly Guys</h1>
 <form action="searchResults.php" method="get">
     Search for flights to or from Stansted:
     <select name="departurePoint">
