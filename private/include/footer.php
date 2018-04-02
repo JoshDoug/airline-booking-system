@@ -1,0 +1,2 @@
+<?php
+// Generic footer info
