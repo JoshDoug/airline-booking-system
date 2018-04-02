@@ -97,5 +97,5 @@ if (isset($_POST['registerNew'])) {
     }
 }
 
-require_once(VIEW_ROOT . '/registerUserView.php');
+require_once(VIEW_ROOT . '/registerView.php');
 ?>
