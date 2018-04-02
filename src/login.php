@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jds
- * Date: 19/02/2018
- * Time: 15:29
- */
+require_once '../private/initialise.php';
+// User Login
 
 if (isset($_POST['login'])) {
     $customerId = trim($_POST['customerId']);
     $pwd = trim($_POST['pwd']);
-    $stmt = $db->prepare('SELECT pwd FROM customer WHERE customerId = :customerId'); // Admin table?
-    $stmt->bindParam(':customerId', $customerId);
+    $stmt = $db->prepare('SELECT pwd FROM customer WHERE email = :email'); // Admin table?
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
     $stored = $stmt->fetchColumn();
     if (password_verify($pwd, $stored)) {
@@ -21,6 +17,9 @@ if (isset($_POST['login'])) {
         header('Location: home.php');
         exit;
     } else {
-        $error = 'Login failed. Check customerId and password.'; // Change to reference number
+        $error = 'Login failed. Check email and password.';
     }
 }
+
+require_once(VIEW_ROOT. '/loginView.php');
+?>
