@@ -35,7 +35,7 @@ function addFlights($endDate) {
     $flightTypes = getFlightTypes("All", "All");
 
     foreach ($flightTypes as $flightType) {
-        for($i = strtotime($flightType->day, $startDate); $i <= $endDate; $i = strtotime('+1 week', $i)) {
+        for ($i = strtotime($flightType->day, $startDate); $i <= $endDate; $i = strtotime('+1 week', $i)) {
             addFlight($flightType, date('Y-m-d', $i));
         }
     }
@@ -60,6 +60,20 @@ function addFlight($flightType, $date) {
 
 // -- Customer --
 // ! Register
+function registerCustomer($firstName, $lastName, $email, $password) {
+    $sql = 'INSERT INTO customer (firstName, lastName, email, password)
+            VALUES (:firstName, :lastName, :email, :password)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':firstName', $firstName);
+    $stmt->bindParam(':lastName', $lastName);
+    $stmt->bindParam(':email', $email);
+    // Store an encrypted version of the password
+    $stmt->bindValue(':pwd', password_hash($password, PASSWORD_DEFAULT));
+    $stmt->execute();
+
+    return $stmt->rowCount() == 1;
+}
+
 //! Add Booking
 
 // ------ READ/SELECT STATEMENTS ------
@@ -101,7 +115,7 @@ function getFlightTypeById($flightTypeId) {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':flightTypeId', $flightTypeId);
     $stmt->execute();
-    return array_shift( $stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType'));
+    return array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'FlightType'));
 }
 
 // -- Both --
@@ -118,12 +132,12 @@ function getFlights($departurePoint, $destination, $startDate, $endDate) {
     global $db;
 
     // If no start date is chosen then default to current date
-    if($startDate == NULL) {
+    if ($startDate == NULL) {
         $startDate = date('Y-m-d');
     }
 
     // If no end date is chosen then default to two years ahead of current date
-    if($endDate == NULL) {
+    if ($endDate == NULL) {
         $endDate = date('Y-m-d', strtotime('+24 Months'));
     }
 
@@ -163,7 +177,20 @@ function getFlightById($flightId) {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':flightId', $flightId);
     $stmt->execute();
-    return array_shift( $stmt->fetchAll(PDO::FETCH_CLASS, 'Flight'));
+    return array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Flight'));
+}
+
+// -- Customer --
+
+// Check if email has been used, return true if it has not (and is good to use)
+function checkEmailExists($email) {
+    global $db;
+    $sql = 'SELECT COUNT(*) FROM customer WHERE email = :email'; // TODO move to dataAccess
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    return $stmt->fetchColumn() != 0;
 }
 
 // ------ UPDATE STATEMENTS ------
