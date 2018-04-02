@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jds
- * Date: 19/02/2018
- * Time: 15:29
- */
+require_once '../private/initialise.php';
+// User Login
 
 if (isset($_POST['login'])) {
     $customerId = trim($_POST['customerId']);
@@ -25,28 +21,5 @@ if (isset($_POST['login'])) {
     }
 }
 
+require_once(VIEW_ROOT. '/loginView.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Fly Guys</title>
-    <meta charset="utf-8">
-</head>
-<body>
-<header>
-    <h1>Fly Guys</h1>
-</header>
-<main>
-    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
-        <?php
-        if (isset($error)) {
-            echo "<p style=\"color: white\">$error</p>";
-        }
-        ?>
-        <input type="email" name="email" placeholder="Email" id="email" required>
-        <input type="password" name="pwd" placeholder="Password" required>
-        <input type="submit" name="login" value="Log In">
-    </form>
-</main>
-</body>
-</html>
