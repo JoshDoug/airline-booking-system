@@ -4,8 +4,8 @@
     <nav>
         <ul>
             <li><a href="basket.php">Basket</a></li>
-            <li><a href="loginUser.php">Login</a></li><!-- Could be removed if we're going to keep the login form -->
-            <li><a href="registerUser.php">Register</a></li>
+            <li><a href="login.php">Login</a></li><!-- Could be removed if we're going to keep the login form -->
+            <li><a href="register.php">Register</a></li>
         </ul>
     </nav>
     <!-- Ensure links work -->
