@@ -16,35 +16,17 @@ if (isset($_POST['registerNew'])) {
             }
         }
     }
-    // Proceed only if there are no errors
-    if (!$errors) {
+    if (!$errors) { // Proceed only if there are no errors
         if ($password === $confirm) {
             // Check that the email hasn't already been registered
-            $sql = 'SELECT COUNT(*) FROM user WHERE email = :email';
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':kNumber', $kNumber);
-            $stmt->execute();
-            if ($stmt->fetchColumn() != 0) {
-                $errors['failed'] = "kNumber is already registered. If this is your kNumber, then please log in, otherwise check you've entered your kNumber correctly.";
+            $emailExists = checkEmailExists($email);
+            if ($emailExists) {
+                $errors['failed'] = "Email is already registered. If this is your email, then please log in,"
+                    . " otherwise check you've entered your email correctly.";
             } else {
-                try {
-                    $sql = 'INSERT INTO user (kNumber, fName, lName, kMail, pwd)
-                            VALUES (:kNumber, :fName, :lName, :kMail, :pwd)';
-                    $stmt = $db->prepare($sql);
-                    $stmt->bindParam(':kNumber', $kNumber);
-                    $stmt->bindParam(':fName', $fName);
-                    $stmt->bindParam(':lName', $lName);
-                    $stmt->bindParam(':kMail', $kMail);
-                    // Store an encrypted version of the password
-                    $stmt->bindValue(':pwd', password_hash($pwd, PASSWORD_DEFAULT));
-                    $stmt->execute();
-                } catch (\PDOException $e) {
-                    $error = $e->getMessage();
-                }
-                // The rowCount() method returns 1 if the record is inserted,
-                // so redirect the user to the login page
-                if ($stmt->rowCount()) {
-                    header('Location: login.php');
+                $registerCustomer = registerCustomer($firstName, $lastName, $email, $password);
+                if ($registerCustomer) {
+                    header('Location: index.php');
                     exit;
                 }
             }
