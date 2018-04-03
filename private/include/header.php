@@ -1,5 +1,5 @@
 <header>
-    <h1>Fly Guys</h1>
+    <h1><a href="index.php">Fly Guys</a></h1>
     <!-- Change this as necessary but keep the links -->
     <nav>
         <ul>
