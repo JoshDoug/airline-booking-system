@@ -1,7 +1,8 @@
 <?php
 
+// --------------------------------------
 // ------ CREATE/INSERT STATEMENTS ------
-
+// --------------------------------------
 // -- Admin --
 // ! Add Location
 function addLocation($locationName) {
@@ -76,7 +77,9 @@ function registerCustomer($firstName, $lastName, $email, $password) {
 
 //! Add Booking
 
+// ------------------------------------
 // ------ READ/SELECT STATEMENTS ------
+// ------------------------------------
 
 // -- Admin --
 // ! Select Flight Types -- could add more search options
@@ -193,7 +196,17 @@ function checkEmailExists($email) {
     return $stmt->fetchColumn() != 0;
 }
 
+function loginUser($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT password FROM customer WHERE email = :email'); // Admin table?
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+// -------------------------------
 // ------ UPDATE STATEMENTS ------
+// -------------------------------
 
 // -- Admin --
 // ! Update Flights
@@ -243,7 +256,9 @@ function updateFlightType($flightTypeId, $departurePoint, $destination, $day, $d
 // -- Customer --
 // Update User Details?
 
+// -------------------------------
 // ------ DELETE STATEMENTS ------
+// -------------------------------
 
 // ! Delete Location
 function deleteLocation($locationName) {
