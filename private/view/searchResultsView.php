@@ -67,6 +67,12 @@
                         <input type="submit" value="Add to Basket"/>
                     </form>
                 </td>
+                <td>
+                    <form action="checkout.php" method="get">
+                        <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
+                        <input type="submit" value="Checkout"/>
+                    </form>
+                </td>
             </tr>
         <?php endforeach ?>
     </table>
