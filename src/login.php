@@ -4,14 +4,11 @@ require_once '../private/initialise.php';
 if (isset($_POST['login'])) {
     $email = trim($_POST['email']); // TODO move to dataAccess
     $password = trim($_POST['password']);
-    $stmt = $db->prepare('SELECT password FROM customer WHERE email = :email'); // Admin table?
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    $stored = $stmt->fetchColumn();
+    $stored = loginUser($email);
     if (password_verify($password, $stored)) {
         session_start();
         session_regenerate_id(true);
-        //$_SESSION['username'] = $customerId;
+        //$_SESSION['username'] = $customerId; // add customer name for nav
         $_SESSION['authenticated'] = true;
         header('Location: user.php');
         exit;
