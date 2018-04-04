@@ -6,9 +6,7 @@
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php') ?>
 <h2>View Flights</h2>
-
 <form action="searchResults.php" method="get">
-
     <label>
         Search for flights to or from Stansted:
         <select name="departurePoint">

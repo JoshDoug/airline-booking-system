@@ -40,14 +40,17 @@
         </p>
     </form>
 
+    <?php if(isset($errors['failed'])) : ?>
+    <p><?= $errors['failed'] ?></p>
+    <?php endif; ?>
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
         <p>
-            <label for="email">Booking Reference:>
-                <input type="text" name="email" required>
+            <label for="bookingReference">Booking Reference:
+                <input type="text" name="bookingReference" required>
             </label>
         </p>
         <p>
-            <label for="email">Email:>
+            <label for="email">Email:
                 <input type="text" name="email" required>
             </label>
         </p>
@@ -63,7 +66,7 @@
 
         </p>
         <p>
-            <input type="submit" name="registerNew" value="Create Account">
+            <input type="submit" name="registerBooking" value="Create Account">
         </p>
     </form>
 </main>
