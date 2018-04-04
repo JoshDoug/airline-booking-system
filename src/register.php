@@ -26,14 +26,15 @@ if (isset($_POST['registerNew'])) {
             } else {
                 $registerCustomer = registerCustomer($firstName, $lastName, $email, $password);
                 if ($registerCustomer) {
-                    header('Location: index.php');
+                    $_SESSION['authenticatedUser'] = $email;
+                    header('Location: user.php');
                     exit;
                 }
             }
         }
     }
 } elseif (isset($_POST['registerBooking'])) {
-    $expected = ['firstName', 'lastName', 'email', 'password', 'confirm'];
+    $expected = ['bookingReference', 'email', 'password', 'confirm'];
     // Assign $_POST variables to simple variables and check all fields have values
     foreach ($_POST as $key => $value) {
         if (in_array($key, $expected)) {
@@ -43,37 +44,28 @@ if (isset($_POST['registerNew'])) {
             }
         }
     }
+    // TODO check if they already have a password
     // Proceed only if there are no errors
     if (!$errors) {
         if ($password === $confirm) {
             // Check that the email hasn't already been registered
-            $sql = 'SELECT COUNT(*) FROM user WHERE email = :email';
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':kNumber', $kNumber);
-            $stmt->execute();
-            if ($stmt->fetchColumn() != 0) {
-                $errors['failed'] = "kNumber is already registered. If this is your kNumber, then please log in, otherwise check you've entered your kNumber correctly.";
-            } else {
-                try {
-                    $sql = 'INSERT INTO user (kNumber, fName, lName, kMail, pwd)
-                            VALUES (:kNumber, :fName, :lName, :kMail, :pwd)';
-                    $stmt = $db->prepare($sql);
-                    $stmt->bindParam(':kNumber', $kNumber);
-                    $stmt->bindParam(':fName', $fName);
-                    $stmt->bindParam(':lName', $lName);
-                    $stmt->bindParam(':kMail', $kMail);
-                    // Store an encrypted version of the password
-                    $stmt->bindValue(':pwd', password_hash($pwd, PASSWORD_DEFAULT));
-                    $stmt->execute();
-                } catch (\PDOException $e) {
-                    $error = $e->getMessage();
-                }
+
+            $bookingExists = checkBookingExists($bookingReference);
+            $emailExists = checkEmailExists($email);
+
+            if ($bookingExists && $emailExists) {
+                $customer = getCustomerByEmail($email);
+                $success = updateCustomer($customer->firstName, $customer->lastName, $email, $password);
+
                 // The rowCount() method returns 1 if the record is inserted,
                 // so redirect the user to the login page
-                if ($stmt->rowCount()) {
-                    header('Location: login.php');
+                if ($success) {
+                    $_SESSION['authenticatedUser'] = $email;
+                    header('Location: user.php');
                     exit;
                 }
+            } else {
+                $errors['failed'] = "Email or Booking Reference don't exist.";
             }
         }
     }
