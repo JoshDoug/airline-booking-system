@@ -8,8 +8,9 @@ if (isset($_POST['login'])) {
     if (password_verify($password, $stored)) {
         session_start();
         session_regenerate_id(true);
-        //$_SESSION['username'] = $customerId; // add customer name for nav
-        $_SESSION['authenticated'] = true;
+        $customer = getCustomerByEmail($email);
+        $_SESSION['username'] = $customer->firstName;
+        $_SESSION['authenticatedCustomer'] = true;
         header('Location: user.php');
         exit;
     } else {
