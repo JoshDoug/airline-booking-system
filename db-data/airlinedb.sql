@@ -43,7 +43,7 @@ CREATE TABLE `administrator` (
 --
 
 CREATE TABLE `booking` (
-  `bookingReference` int(10) NOT NULL,
+  `bookingReference` varchar(10) NOT NULL,
   `customerId` int(7) NOT NULL,
   `flightId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -246,7 +246,7 @@ ALTER TABLE `administrator`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookingReference` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookingReference` varchar(10) NOT NULL;
 
 --
 -- AUTO_INCREMENT for table `customer`
