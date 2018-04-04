@@ -76,6 +76,33 @@ function registerCustomer($firstName, $lastName, $email, $password) {
 }
 
 //! Add Booking
+function addBooking($bookingReference, $flightId, $firstName, $lastName, $email) {
+    global $db;
+    if (!checkEmailExists($email)) {
+        registerCustomerBooking($firstName, $lastName, $email);
+    }
+    $customerId = getCustomerId($email);
+    $sql = 'INSERT INTO booking (bookingReference, customerId, flightId)
+            VALUES (:bookingReference, :customerId, :flightId)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':bookingReference', $bookingReference);
+    $stmt->bindParam(':customerId', $customerId);
+    $stmt->bindParam(':flightId', $flightId);
+    $stmt->execute();
+}
+
+function registerCustomerBooking($firstName, $lastName, $email) {
+    global $db;
+    $sql = 'INSERT INTO customer (firstName, lastName, email)
+            VALUES (:firstName, :lastName, :email)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':firstName', $firstName);
+    $stmt->bindParam(':lastName', $lastName);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->rowCount() == 1;
+}
+
 
 // ------------------------------------
 // ------ READ/SELECT STATEMENTS ------
@@ -198,10 +225,39 @@ function checkEmailExists($email) {
 
 function loginUser($email) {
     global $db;
-    $stmt = $db->prepare('SELECT password FROM customer WHERE email = :email'); // Admin table?
+    $stmt = $db->prepare('SELECT password FROM customer WHERE email = :email');
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     return $stmt->fetchColumn();
+}
+
+function getCustomerId($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT customerId FROM customer WHERE email = :email');
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+function getCustomerByEmail($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM customer WHERE email = :email');
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return  array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Customer'));
+}
+
+function getBooking() {
+    // TODO write function
+}
+
+function checkBookingExists($bookingReference) {
+    global $db;
+    $sql = 'SELECT COUNT(*) FROM booking WHERE bookingReference = :bookingReference'; // TODO move to dataAccess
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':bookingReference', $bookingReference);
+    $stmt->execute();
+    return $stmt->fetchColumn() != 0;
 }
 
 // -------------------------------
@@ -249,6 +305,21 @@ function updateFlightType($flightTypeId, $departurePoint, $destination, $day, $d
     $stmt->bindParam(':type', $type);
     $stmt->bindParam(':flightTypeId', $flightTypeId);
     $stmt->execute();
+}
+
+// Register User (Add password) TODO check for null passwords on login and dissallow
+function updateCustomer($firstName, $lastName, $email, $password) {
+    global $db;
+    $sql = 'UPDATE customer
+            SET firstName=:firstName, lastName=:lastName, password=:password
+            WHERE email=:email';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':firstName', $firstName);
+    $stmt->bindParam(':lastName', $lastName);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
+    $stmt->execute();   // Store an encrypted version of the password
+    return $stmt->rowCount() == 1;
 }
 
 // ! Update Location
