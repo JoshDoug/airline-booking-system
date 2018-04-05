@@ -28,6 +28,7 @@ if(isset($error)) {
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
         <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
         <!--  TODO Add number of flights once Sam adds selector  -->
+        <?php if (!isset($_SESSION['authenticatedUser'])) : ?>
         <p>
             <label for="firstName">First Name:
                 <input type="text" name="firstName" required>
@@ -38,6 +39,7 @@ if(isset($error)) {
                 <input type="text" name="lastName" required>
             </label>
         </p>
+        <?php endif ?>
         <p>
             <label for="email">Email:
                 <input type="email" name="email" placeholder="Email" required>
