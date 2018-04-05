@@ -1,6 +1,7 @@
 <?php
 // Manage Flight Information
 require_once '../../private/initialise.php';
+require_once(INCLUDE_ROOT . '/adminAuthRequired.php');
 
 //echo $_REQUEST['departurePoint'];
 //echo $_REQUEST['destination'];
