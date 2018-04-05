@@ -57,6 +57,19 @@ function addFlight($flightType, $date) {
 }
 
 // Add Administrator
+function registerAdmin($firstName, $lastName, $email, $password) {
+    global $db;
+    $sql = 'INSERT INTO administrator (firstName, lastName, companyEmail, password)
+            VALUES (:firstName, :lastName, :email, :password)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':firstName', $firstName);
+    $stmt->bindParam(':lastName', $lastName);
+    $stmt->bindParam(':email', $email);
+    // Store an encrypted version of the password
+    $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
+    $stmt->execute();
+    return $stmt->rowCount() == 1;
+}
 
 // -- Customer --
 // ! Register
@@ -232,7 +245,7 @@ function loginUser($email) {
 
 function loginAdmin($email) {
     global $db;
-    $stmt = $db->prepare('SELECT password FROM administrator WHERE email = :email');
+    $stmt = $db->prepare('SELECT password FROM administrator WHERE companyEmail = :email');
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     return $stmt->fetchColumn();
@@ -252,6 +265,14 @@ function getCustomerByEmail($email) {
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     return  array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Customer'));
+}
+
+function getAdminByEmail($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM administrator WHERE companyEmail = :email');
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return  array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Admin'));
 }
 
 function getBooking($bookingReference) {
