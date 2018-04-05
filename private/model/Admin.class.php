@@ -6,7 +6,7 @@
  * Time: 15:22
  */
 
-class Administrator {
+class Admin {
     private $adminId;
     private $password = ''; // No need to store this in an object when it's only getting checked at login - more secure
     private $firstName;
