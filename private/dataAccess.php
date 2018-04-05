@@ -230,6 +230,14 @@ function loginUser($email) {
     return $stmt->fetchColumn();
 }
 
+function loginAdmin($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT password FROM administrator WHERE email = :email');
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
 function getCustomerId($email) {
     global $db;
     $stmt = $db->prepare('SELECT customerId FROM customer WHERE email = :email');
