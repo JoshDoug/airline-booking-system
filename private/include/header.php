@@ -2,11 +2,12 @@
 if (isset($_SESSION['authenticatedUser'])) {
     $customer = getCustomerByEmail($_SESSION['authenticatedUser']);
     $authenticated = true;
+} else {
+    $authenticated = false;
 }
 ?>
 <header>
     <h1><a href="index.php">Fly Guys</a></h1>
-    <!-- Change this as necessary but keep the links -->
     <nav>
         <?php if ($authenticated) : ?>
             <p><?= $customer->firstName ?></p>
@@ -22,5 +23,4 @@ if (isset($_SESSION['authenticatedUser'])) {
             <li><a href="register.php">Register</a></li>
         </ul>
     </nav>
-    <!-- Ensure links work -->
 </header>
