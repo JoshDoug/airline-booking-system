@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrator` (
   `adminId`      int(10)                                 NOT NULL,
-  `password`     varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password`     varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstName`    text COLLATE utf8mb4_unicode_ci         NOT NULL,
   `lastName`     text COLLATE utf8mb4_unicode_ci         NOT NULL,
-  `companyEmail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `companyEmail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
@@ -71,8 +71,8 @@ CREATE TABLE `customer` (
   `customerId` int(7)                                  NOT NULL,
   `firstName`  varchar(30) COLLATE utf8mb4_unicode_ci  NOT NULL,
   `lastName`   varchar(30) COLLATE utf8mb4_unicode_ci  NOT NULL,
-  `email`      varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password`   varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `email`      varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password`   varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
