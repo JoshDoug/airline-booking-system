@@ -4,7 +4,7 @@
 // Display customer details such as name, email, booked flights
 
 require_once '../private/initialise.php';
-require_once(INCLUDE_ROOT . '/authRequired.php');
+require_once(INCLUDE_ROOT . '/userAuthRequired.php');
 
 $customer = getCustomerByEmail($_SESSION['authenticatedUser']);
 $bookings = getBookingsByCustomer($customer->customerId);
