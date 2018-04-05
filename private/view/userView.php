@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fly Guys | Booking</title>
+    <title>Fly Guys | User Profile</title>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php'); ?>
 <main>
-    <h2>Booking Details</h2>
+    <h2>User Details</h2>
     <ul>
         <li>Booking ref: <?= $booking->bookingReference ?></li>
         <li>First Name: <?= $_REQUEST['firstName'] ?></li>
@@ -19,6 +19,10 @@
         <li><?= $flight->duration ?></li>
         <li><?= $flight->day ?></li>
         <li><?= $flight->type ?></li>
+    </ul>
+    <h2>User Bookings</h2>
+    <ul>
+        <li></li>
     </ul>
 </main>
 </body>
