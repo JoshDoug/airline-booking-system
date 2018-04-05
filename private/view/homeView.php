@@ -27,7 +27,7 @@
         <input type="submit" value="Search Flights"/>
     </form>
     <h2>Retrieve Booking</h2>
-    <form action="bookings.php" method="post">
+    <form action="booking.php" method="post">
         <p>
             <label for="firstName">First Name:
                 <input type="text" name="firstName" required>
@@ -45,11 +45,11 @@
         </p>
         <p>
             <label for="booking">Booking Number:
-                <input type="text" name="email" required>
+                <input type="text" name="bookingReference" required>
             </label>
         </p>
         <p>
-            <input type="submit" name="register" value="Retrieve Booking">
+            <input type="submit" name="retrieveBooking" value="Retrieve Booking">
         </p>
     </form>
     <!-- Image Carousel Stuff I guess -->
