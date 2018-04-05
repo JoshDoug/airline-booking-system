@@ -10,14 +10,5 @@ if (!isset($_REQUEST['flightId'])) {
 
 $flight = getFlightById($_REQUEST['flightId']);
 
+require_once(VIEW_ROOT . '/admin/showFlightView.php')
 ?>
-<ul>
-    <li><?= $flight->flightId ?></li>
-    <li><?= $flight->departurePoint ?></li>
-    <li><?= $flight->destination ?></li>
-    <li><?= $flight->departureTime ?></li>
-    <li><?= $flight->date ?></li>
-    <li><?= $flight->duration ?></li>
-    <li><?= $flight->day ?></li>
-    <li><?= $flight->type ?></li>
-</ul>
