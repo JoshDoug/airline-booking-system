@@ -9,7 +9,9 @@ if (isset($_REQUEST['departurePoint']) && isset($_REQUEST['destination'])) {
 }
 
 if (isset($_REQUEST['addToBasket'])) {
-    $_SESSION['basket'][] = $_REQUEST['addToBasket'];
+    if(!in_array($_REQUEST['addToBasket'], $_SESSION['basket'])) {
+        $_SESSION['basket'][] = $_REQUEST['addToBasket'];
+    }
 }
 
 // View logic to be separated
