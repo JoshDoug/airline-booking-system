@@ -1,5 +1,4 @@
 <?php
-
 // --------------------------------------
 // ------ CREATE/INSERT STATEMENTS ------
 // --------------------------------------
@@ -247,13 +246,18 @@ function getCustomerByEmail($email) {
     return  array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Customer'));
 }
 
-function getBooking() {
-    // TODO write function
+function getBooking($bookingReference) {
+    global $db;
+    $sql = 'SELECT * FROM booking WHERE bookingReference = :bookingReference';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':bookingReference', $bookingReference);
+    $stmt->execute();
+    return array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Booking'));
 }
 
 function checkBookingExists($bookingReference) {
     global $db;
-    $sql = 'SELECT COUNT(*) FROM booking WHERE bookingReference = :bookingReference'; // TODO move to dataAccess
+    $sql = 'SELECT COUNT(*) FROM booking WHERE bookingReference = :bookingReference';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':bookingReference', $bookingReference);
     $stmt->execute();
