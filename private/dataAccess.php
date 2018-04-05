@@ -264,6 +264,24 @@ function checkBookingExists($bookingReference) {
     return $stmt->fetchColumn() != 0;
 }
 
+function getBookingsByCustomer($customerId) {
+    global $db;
+    $sql = 'SELECT * FROM booking WHERE customerId = :customerId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':customerId', $customerId);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_CLASS, 'Booking');
+}
+
+function getFlightDetails($flightId) {
+    global $db;
+    $sql = 'SELECT * FROM flight WHERE flightId=:flightId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':flightId', $flightId);
+    $stmt->execute();
+    return array_shift($stmt->fetchAll(PDO::FETCH_CLASS, 'Flight'));
+}
+
 // -------------------------------
 // ------ UPDATE STATEMENTS ------
 // -------------------------------
