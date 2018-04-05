@@ -2,7 +2,7 @@
 require_once '../private/initialise.php';
 
 if (isset($_POST['login'])) {
-    $email = trim($_POST['email']); // TODO move to dataAccess
+    $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $stored = loginUser($email);
     if (password_verify($password, $stored)) {
