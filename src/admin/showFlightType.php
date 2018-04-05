@@ -1,5 +1,6 @@
 <?php
 require_once '../../private/initialise.php';
+require_once(INCLUDE_ROOT . '/adminAuthRequired.php');
 
 //if (!isset($_REQUEST['flightTypeId'])) {
 //    header('Location: manageFlightTypes.php');

@@ -1,8 +1,6 @@
 <?php
 require_once '../../private/initialise.php';
-
-// Might make more sense to have this in the normal directory as customers might view a flight specifically?
-// But maybe not, can always be changed at a later date
+require_once(INCLUDE_ROOT . '/adminAuthRequired.php');
 
 if (!isset($_REQUEST['flightId'])) {
     header('Location: manageFlights.php');

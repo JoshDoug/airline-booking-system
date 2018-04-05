@@ -1,7 +1,6 @@
 <?php
 require_once '../../private/initialise.php';
-
-// Move this logic into a controller and rename file to editFlightTypeView.php
+require_once(INCLUDE_ROOT . '/adminAuthRequired.php');
 
 if(isset($_REQUEST['editFlightType'])) {
     // Update DB and redirect to show page
