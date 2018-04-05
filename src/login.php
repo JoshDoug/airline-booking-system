@@ -10,7 +10,7 @@ if (isset($_POST['login'])) {
         session_regenerate_id(true);
         $customer = getCustomerByEmail($email);
         $_SESSION['username'] = $customer->firstName;
-        $_SESSION['authenticatedCustomer'] = true;
+        $_SESSION['authenticatedUser'] = $email;
         header('Location: user.php');
         exit;
     } else {
