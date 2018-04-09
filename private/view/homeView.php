@@ -4,8 +4,7 @@
     <title>Fly Guys</title>
     <?php require_once(INCLUDE_ROOT . '/head.php') ?>
     <link rel="stylesheet" type="text/css" href="/css/carousel.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/carousel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php') ?>
@@ -41,7 +40,6 @@
                 <li>
                     <label for="firstName">First Name:</label>
                     <input type="text" name="firstName" required>
-
                 </li>
                 <li>
                     <label for="lastName">Last Name:</label>
@@ -70,5 +68,6 @@
         </div>
     </div>
 </main>
+<script type="text/javascript" src="/js/carousel.js"></script>
 </body>
 </html>
