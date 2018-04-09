@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Fly Guys | Admin</title>
-    <meta charset="utf-8">
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <main>
