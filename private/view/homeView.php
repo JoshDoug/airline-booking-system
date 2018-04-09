@@ -24,6 +24,13 @@
                 <?php endforeach ?>
             </select>
 
+            <div class="counter">
+                <label for="qty" title="Tickets">Ticket No.</label>
+                <input name="ticketNo" id="qty" value="0" />
+                <button type="button" id="down" onclick="modify_qty(-1)">-1</button>
+                <button type="button" id="up" onclick="modify_qty(1)">+1</button>
+            </div>
+
             <input type="date" name="startDate" min="<?= date('Y-m-d') ?>">
             <input type="date" name="endDate" min="<?= date('Y-m-d') ?>">
             <input type="submit" value="Search Flights"/>
