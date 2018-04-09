@@ -11,10 +11,5 @@ function modify_qty(val) {
 }
 
 /*
-<div class="counter">
-<label for="qty"><abbr title="Adults">Adults</abbr></label>
-<input id="qty" value="0" />
-<button id="down" onclick="modify_qty(-1)">-1</button>
-<button id="up" onclick="modify_qty(1)">+1</button>
-</div>
+
  */
