@@ -50,12 +50,10 @@
                 <li>
                     <label for="email">Email:</label>
                     <input type="text" name="email" required>
-
                 </li>
                 <li>
                     <label for="booking">Booking Number:</label>
                     <input type="text" name="bookingReference" required>
-
                 </li>
                 <li>
                     <input type="submit" name="retrieveBooking" value="Retrieve Booking">
