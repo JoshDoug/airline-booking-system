@@ -48,7 +48,6 @@
     <div class="flex-table">
         <table id="table">
             <tr>
-                <th>Flight Type Id</th>
                 <th>Departure Point</th>
                 <th>Destination</th>
                 <th>Date</th>
@@ -61,7 +60,6 @@
             </tr>
             <?php foreach ($flights as $flight): ?>
                 <tr>
-                    <td><?= $flight->flightId ?></td>
                     <td><?= $flight->departurePoint ?></td>
                     <td><?= $flight->destination ?></td>
                     <td><?= $flight->date ?></td>

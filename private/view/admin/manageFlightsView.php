@@ -38,7 +38,7 @@
     <?php if (isset($flights)) : ?>
         <table>
             <tr>
-                <th>Flight Type Id</th>
+                <th>Flight Id</th>
                 <th>Departure Point</th>
                 <th>Destination</th>
                 <th>Date</th>
@@ -46,8 +46,8 @@
                 <th>Duration</th>
                 <th>Day</th>
                 <th>Type</th>
-                <th></th>
-                <th></th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
             <?php foreach ($flights as $flight): ?>
                 <tr>

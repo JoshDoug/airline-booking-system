@@ -24,8 +24,6 @@
                 <ul class="flex-outer">
                     <li><h2>User Bookings</h2></li>
                     <li><h2>Booking Code <?= $booking->bookingReference ?></h2></li>
-
-                    <li>Flight No. <?= $flight->flightId ?></li>
                     <li>Departure Point: <?= $flight->departurePoint ?></li>
                     <li>Destination: <?= $flight->destination ?></li>
                     <li>Departure Time: <?= $flight->departureTime ?></li>

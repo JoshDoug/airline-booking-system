@@ -92,8 +92,8 @@
             <th>Duration</th>
             <th>Day</th>
             <th>Type</th>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <?php foreach ($flightTypes as $flightType): ?>
             <tr>
