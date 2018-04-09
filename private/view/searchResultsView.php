@@ -27,6 +27,13 @@
             </select>
         </label>
 
+        <div class="counter">
+            <label for="qty" title="Tickets">Ticket No.</label>
+            <input name="ticketNo" id="qty" value="0" />
+            <button type="button" id="down" onclick="modify_qty(-1)">-1</button>
+            <button type="button" id="up" onclick="modify_qty(1)">+1</button>
+        </div>
+
         <label>Start date range:
             <input type="date" name="startDate" min="<?= date('Y-m-d') ?>">
         </label>
@@ -72,6 +79,7 @@
                     <td>
                         <form action="checkout.php" method="get">
                             <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
+                            <input type="hidden" name="ticketNo" value="<?= $_REQUEST['ticketNo'] ?>">
                             <input type="submit" value="Checkout"/>
                         </form>
                     </td>
