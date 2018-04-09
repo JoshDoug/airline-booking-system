@@ -227,7 +227,7 @@ function getFlightById($flightId) {
 // Check if email has been used, return true if it has not (and is good to use)
 function checkEmailExists($email) {
     global $db;
-    $sql = 'SELECT COUNT(*) FROM customer WHERE email = :email'; // TODO move to dataAccess
+    $sql = 'SELECT COUNT(*) FROM customer WHERE email = :email';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
