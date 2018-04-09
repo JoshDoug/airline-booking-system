@@ -9,7 +9,3 @@ function modify_qty(val) {
     document.getElementById('qty').value = new_qty;
     return new_qty;
 }
-
-/*
-
- */
