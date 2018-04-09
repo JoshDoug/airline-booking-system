@@ -5,18 +5,24 @@ body {
     /*padding: 50px 0;*/
 }
 
+a {
+    text-decoration: none;
+}
+
 .flight-container {
     text-decoration: none;
     display: flex;
     justify-content: center;
-    background-color: #29C7F6;
-    border: 20px solid #29C7F6;
-    background: #3AAFAB;
+    background-color: darkgray;
+    padding: 5px;
+    /*border: 20px solid #29C7F6;*/
+    /*background: #3AAFAB;*/
 }
 
 .retrieve-booking-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 1em;
 }
 
 .flex-outer {
@@ -72,10 +78,10 @@ body {
     border-radius: 2px;
 }
 
-.image-container {
-    display: flex;
-    justify-content: flex-end;
-}
+/*.image-container {*/
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+/*}*/
 
 .menu-container {
     display: flex;
@@ -124,7 +130,7 @@ body {
     border: none;
 }
 
-.flex-outer2 li button {
+.flex-outer2 li button, input[type="submit"] {
     margin-left: auto;
     padding: 8px 16px;
     border: none;
@@ -133,6 +139,7 @@ body {
     text-transform: uppercase;
     letter-spacing: .09em;
     border-radius: 2px;
+    margin: 2px;
 }
 
 .flex-outer3 {
@@ -185,4 +192,9 @@ header {
     align-items: center;
     justify-content: space-between;
     background: #f2f2f2;
+    padding: 0 0.5em;
+}
+
+nav a {
+    padding: 0.5em;
 }
