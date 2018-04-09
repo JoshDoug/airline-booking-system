@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Create Account</title>
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php') ?>
 <main>
     <h2>Create Account</h2>
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
-        <p>
-            <label for="firstName">First Name:
+    <ul class="flex-outer2">
+        <li>
+            <label for="firstName">First Name:</label>
                 <input type="text" name="firstName" required>
-            </label>
-        </p>
-        <p>
-            <label for="lastName">Last Name:
+            
+        </li>
+        <li>
+            <label for="lastName">Last Name:</label>
                 <input type="text" name="lastName" required>
-            </label>
-        </p>
-        <p>
-            <label for="email">Email:
+            
+        </li>
+        <li>
+            <label for="email">Email:</label>
                 <input type="text" name="email" required>
-            </label>
-        </p>
-        <p>
-            <label for="password">Password:
+            
+        </li>
+        <li>
+            <label for="password">Password:</label>
                 <input type="password" name="password" required>
-            </label>
-        </p>
-        <p>
-            <label for="confirm">Confirm Password:
+            
+        </li>
+        <li>
+            <label for="confirm">Confirm Password:</label>
                 <input type="password" name="confirm" required>
-            </label>
-
-        </p>
-        <p>
+        
+        </li>
+        <li>
             <input type="submit" name="registerNew" value="Create Account">
-        </p>
+        </li>
+        </ul>
     </form>
 
     <?php if(isset($errors['failed'])) : ?>
     <p><?= $errors['failed'] ?></p>
     <?php endif; ?>
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
-        <p>
-            <label for="bookingReference">Booking Reference:
+        <ul class="flex-outer2">
+        <li>
+            <label for="bookingReference">Booking Reference:</label>
                 <input type="text" name="bookingReference" required>
-            </label>
-        </p>
-        <p>
-            <label for="email">Email:
+            
+        </li>
+        <li>
+            <label for="email">Email:</label>
                 <input type="text" name="email" required>
-            </label>
-        </p>
-        <p>
-            <label for="password">Password:
+            
+        </li>
+        <li>
+            <label for="password">Password:</label>
                 <input type="password" name="password" required>
-            </label>
-        </p>
-        <p>
-            <label for="confirm">Confirm Password:
+            
+        </li>
+        <li>
+            <label for="confirm">Confirm Password:</label>
                 <input type="password" name="confirm" required>
-            </label>
+            
 
-        </p>
-        <p>
+        </li>
+        <li>
             <input type="submit" name="registerBooking" value="Create Account">
-        </p>
+        </li>
     </form>
 </main>
 </body>

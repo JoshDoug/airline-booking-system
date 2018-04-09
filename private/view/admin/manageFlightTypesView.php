@@ -2,16 +2,12 @@
 <html lang="en">
 <head>
     <title>Fly Guys | Admin</title>
-    <meta charset="utf-8">
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/adminHeader.php') ?>
 <main>
     <h1>Manage Flight Types</h1>
-
-    <p><a href="index.php">Admin Page</a></p>
-
-
     <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="addLocation" value="addLocation">
         Add Location: <input name="location"/>

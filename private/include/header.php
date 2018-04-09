@@ -12,15 +12,13 @@ if (isset($_SESSION['authenticatedUser'])) {
         <?php if ($authenticated) : ?>
             <p><?= $customer->firstName ?></p>
         <?php endif ?>
-        <ul>
-            <li><a href="basket.php">Basket</a></li>
-            <?php if ($authenticated) : ?>
-                <li><a href="user.php">Profile</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            <?php else : ?>
-                <li><a href="login.php">Login</a></li><!-- Could be removed if we're going to keep the login form -->
-            <?php endif ?>
-            <li><a href="register.php">Register</a></li>
-        </ul>
+        <a href="basket.php">Basket</a>
+        <?php if ($authenticated) : ?>
+            <a href="user.php">Profile</a>
+            <a href="logout.php">Logout</a>
+        <?php else : ?>
+            <a href="login.php">Login</a>
+        <?php endif ?>
+        <a href="register.php">Register</a>
     </nav>
 </header>

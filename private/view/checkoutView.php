@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Fly Guys | Checkout</title>
-    <meta charset="utf-8">
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php');
@@ -12,8 +12,9 @@ if(isset($error)) {
 ?>
 <main>
     <h2>Checkout</h2>
-    <p>Flight Details:</p>
-    <ul>
+    <div class="checkout-container">
+    <ul class="flex-outer2">
+    <li><p>Flight Details:</p></li>
         <li><?= $flight->departurePoint ?></li>
         <li><?= $flight->destination ?></li>
         <li><?= $flight->departureTime ?></li>
@@ -23,30 +24,38 @@ if(isset($error)) {
         <li><?= $flight->type ?></li>
     </ul>
     <!--  Not going to bother with entering dummy payment details malarkey  -->
-    <p>Required details to check flight out:</p>
+    
 <!--  TODO Only require confirmation if customer is logged in? -->
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+    <ul class="flex-outer2">
         <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
         <!--  TODO Add number of flights once Sam adds selector  -->
         <?php if (!isset($_SESSION['authenticatedUser'])) : ?>
-        <p>
-            <label for="firstName">First Name:
+        <li>
+            <p>Required details to check flight out:</p>
+        </li>
+        <li>
+            <label for="firstName">First Name:</label>
                 <input type="text" name="firstName" required>
-            </label>
-        </p>
-        <p>
-            <label for="lastName">Last Name:
+            
+        </li>
+        <li>
+            <label for="lastName">Last Name:</label>
                 <input type="text" name="lastName" required>
-            </label>
-        </p>
+            
+        </li>
         <?php endif ?>
-        <p>
-            <label for="email">Email:
+        <li>
+            <label for="email">Email:</label>
                 <input type="email" name="email" placeholder="Email" required>
-            </label>
-        </p>
+            
+        </li>
+        <li>
         <input type="submit" name="checkout" value="Checkout">
+        </li>
+    </ul>
     </form>
+</div>
 </main>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Fly Guys</title>
-    <meta charset="utf-8">
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php') ?>
@@ -14,9 +14,17 @@
             echo "<p style=\"color: red\">$error</p>";
         }
         ?>
+        <ul class="flex-outer">
+        <li>
+        <label for="email">Enter your Email:</label>
         <input type="email" name="email" placeholder="Email" id="email" required>
+        </li>
+        <li>
+        <label for="password">Enter your Password:</label>
         <input type="password" name="password" placeholder="Password" required>
+        </li>
         <input type="submit" name="login" value="Log In">
+        </ul>
     </form>
 </main>
 </body>
