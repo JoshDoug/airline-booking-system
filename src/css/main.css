@@ -9,6 +9,10 @@ a {
     text-decoration: none;
 }
 
+h2, p {
+    padding-left: 1em;
+}
+
 .flight-container {
     text-decoration: none;
     display: flex;
