@@ -30,7 +30,6 @@
         </form>
     </div>
     <div class="retrieve-booking-container">
-
         <form action="booking.php" method="post">
             <ul class="flex-outer">
                 <li>
@@ -60,12 +59,8 @@
                 </li>
             </ul>
         </form>
+        <img src="http://www.livetradingnews.com/wp-content/uploads/2017/06/paris-attractions-xlarge-701x438.jpg" alt="Flowers in Chania">
     </div>
-    <div class="image-container">
-        <img src="http://www.livetradingnews.com/wp-content/uploads/2017/06/paris-attractions-xlarge-701x438.jpg"
-             alt="Flowers in Chania">
-    </div>
-    <!-- Image Carousel Stuff I guess -->
 </main>
 </body>
 </html>

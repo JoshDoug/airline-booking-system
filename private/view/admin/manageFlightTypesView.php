@@ -8,10 +8,6 @@
 <?php require_once(INCLUDE_ROOT . '/adminHeader.php') ?>
 <main>
     <h1>Manage Flight Types</h1>
-
-    <p><a href="index.php">Admin Page</a></p>
-
-
     <form action="manageFlightTypes.php" method="post">
         <input type="hidden" name="addLocation" value="addLocation">
         Add Location: <input name="location"/>
