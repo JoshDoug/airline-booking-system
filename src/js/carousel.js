@@ -7,6 +7,3 @@ function changeImage(){
     $($imgs.get(next)).fadeIn(500);
 }
 var interval = setInterval(changeImage, 2000);
-
-/* save this as a js file*/
-/* needs to add in src, from jquery library 1.7.1*/
