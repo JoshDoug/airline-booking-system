@@ -1,0 +1,9 @@
+.image-container {
+    /*display: inline-block;*/
+}
+
+.image-container img {
+    display: none;
+    float: right;
+    position: relative;
+}
