@@ -2,7 +2,7 @@ body {
     font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
     background: #3AAFAB;
     color: #fff;
-    padding: 50px 0;
+    /*padding: 50px 0;*/
 }
 
 .flight-container {
@@ -177,4 +177,12 @@ td {
     justify-content: center;
     border-collapse: collapse;
 
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #f2f2f2;
 }
