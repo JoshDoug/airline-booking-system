@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="index.css">
     <title>Fly Guys | User Profile</title>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php'); ?>
 <main>
     <section>
-        <h2>User Details</h2>
-        <ul>
+        
+        <ul class="flex-outer">
+        <li><h2>User Details</h2></li>
             <li>First Name: <?= $customer->firstName ?></li>
             <li>Last Name: <?= $customer->lastName ?></li>
             <li>Email: <?= $customer->email ?></li>
         </ul>
     </section>
     <article>
-        <h2>User Bookings</h2>
+        
         <?php foreach ($bookings as $booking) :
             $flight = getFlightDetails($booking->flightId); ?>
         <section>
-            <h2>Booking Code <?= $booking->bookingReference ?></h2>
-            <ul>
+         <ul class="flex-outer">
+            <li><h2>User Bookings</h2></li>
+            <li><h2>Booking Code <?= $booking->bookingReference ?></h2></li>
+           
                 <li>Flight No. <?= $flight->flightId ?></li>
                 <li>Departure Point: <?= $flight->departurePoint ?></li>
                 <li>Destination: <?= $flight->destination ?></li>

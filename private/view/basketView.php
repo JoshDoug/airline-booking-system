@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="index.css">
     <title>Fly Guys | Search Results</title>
 </head>
 <body>
@@ -8,7 +9,7 @@
 <main>
 <?php foreach ($flights as $flight) : ?>
     <h2>Flight <?= $flight->flightId ?></h2>
-    <ul>
+    <ul class="flex-outer2">
         <li><?= $flight->departurePoint ?></li>
         <li><?= $flight->destination ?></li>
         <li><?= $flight->departureTime ?></li>
@@ -16,14 +17,17 @@
         <li><?= $flight->duration ?></li>
         <li><?= $flight->day ?></li>
         <li><?= $flight->type ?></li>
-        <form action="checkout.php" method="get">
+        <li><form action="checkout.php" method="get">
             <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
             <input type="submit" value="Checkout"/>
         </form>
+        </li>
+        <li>
         <form action="basket.php" method="post">
             <input type="hidden" name="flightId" value="<?= $flight->flightId ?>">
             <input type="submit" name="remove" value="Remove"/>
         </form>
+        </li>
         <!--  TODO add remove/checkout options  -->
     </ul>
 <?php endforeach ?>
