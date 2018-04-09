@@ -41,7 +41,7 @@ CREATE TABLE `administrator` (
 
 --
 -- Dumping data for table `administrator`
---
+-- Default Creds - admin@flyguys.com and password (eek)
 
 INSERT INTO `administrator` (`adminId`, `password`, `firstName`, `lastName`, `companyEmail`) VALUES
   (1, '$2y$10$v9bDoH0ObH4AXEbtUGqydOBan7We24Tp6vQ3oi5QCZvrr228Bm.3G', 'Admin', 'User', 'admin@flyguys.com');
