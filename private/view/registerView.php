@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="index.css">
-    <meta charset="utf-8">
     <title>Create Account</title>
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php') ?>

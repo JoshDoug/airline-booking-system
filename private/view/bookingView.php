@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Fly Guys | Booking</title>
+    <?php require_once(INCLUDE_ROOT . '/head.php') ?>
 </head>
 <body>
 <?php require_once(INCLUDE_ROOT . '/header.php'); ?>
